@@ -34,7 +34,11 @@ class TaskForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.handleToUpdate(this.state.form);
-      }
+    }
+
+    updateForm(formData) {
+        console.log('updateForm: ', formData);
+    }
 
 
     render() {
@@ -53,8 +57,10 @@ class TaskForm extends Component {
                     <label>
                         status
                         <select onChange={this.handleStatusChange}>
-                            {this.props.gridStatus.map((status)=>
-                                <option key={status.id} value={status.id}>{status.name}</option>
+                            {this.props.gridStatus.map((status)=> {
+                                let itemStatus = (status.id === this.state.form.status) ? 'Selected' : '';
+                                return <option key={status.id} value={status.id} selected={itemStatus}>{status.name}</option>
+                                }
                             )}
                         </select>
                     </label>

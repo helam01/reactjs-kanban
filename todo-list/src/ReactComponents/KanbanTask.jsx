@@ -7,20 +7,26 @@ class KanbanTask extends Component{
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
+
+    this.state = {taskForm:null }
     
   }
 
   editTaksHandle(taskId) {
     let task = this.props.tasks.find(t=> t.id === taskId);
-console.log('Edit: ', taskId);
-    ReactDOM.render(
-      <TaskForm 
+    console.log('Edit: ', taskId);
+    let taskForm = null;
+
+    ReactDOM.unmountComponentAtNode(document.getElementById('tasksForm'));
+      taskForm = ReactDOM.render(
+        <TaskForm 
         task={task} 
         gridStatus={this.props.gridStatus } 
         handleToUpdate={this.props.parentHandleToUpdate.bind(this)}/>, 
 
       document.getElementById('tasksForm'));
   }
+
 
   render() {
     return (
